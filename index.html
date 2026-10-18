@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alex Christian C. Tan | Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<div class="bar">
+<a class="brand" href="#home">Alex Christian C. Tan</a>
+<nav aria-label="Main">
+<a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+</nav>
+<button class="theme" id="theme" type="button" aria-label="Switch between light and dark mode">Dark mode</button>
+</div>
+</header>
+
+<main>
+<section id="home" class="hero">
+<div class="photo"><img src="portrait.jpg" width="480" height="480" alt="Portrait of Alex Christian C. Tan in a dark suit and white collared shirt"></div>
+<div>
+<h1>Alex Christian C. Tan</h1>
+<p class="lead">I'm a student learning web development. I build responsive pages that work on both a phone and a computer, and I'm drawn to public-service websites that make everyday tasks easier for people.</p>
+<div class="btns">
+<a class="btn primary" href="#projects">See my project</a>
+<a class="btn" href="mailto:waterix7@gmail.com">Email me</a>
+</div>
+<p class="now">Right now I'm <span id="role">styling navigation menus</span></p>
+</div>
+</section>
+
+<section id="about">
+<h2>About me</h2>
+<div class="split">
+<div>
+<p>I'm Alex, a 22-year-old student from Cebu City. I'm building my web development skills through class projects, starting with the front end and working toward full-stack.</p>
+<p>My biggest project so far is a team-built School Based website for the Commission on Human Rights (CHR) Philippines. It showed me how much clear layout and navigation matter when a site is meant for everyday people.</p>
+</div>
+<dl>
+<dt>Based in</dt><dd>Cebu City, Philippines</dd>
+<dt>Focus</dt><dd>Front-end web development</dd>
+<dt>Interested in</dt><dd>Responsive design, accessibility, and public-service websites</dd>
+</dl>
+</div>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+<div class="skills">
+<div>
+<h3>What I can do now</h3>
+<ul>
+<li>Structure pages with HTML5 and style them with CSS3</li>
+<li>Build basic responsive layouts with media queries</li>
+<li>Create navigation bars and dropdown menus</li>
+<li>Write basic JavaScript</li>
+</ul>
+</div>
+<div>
+<h3>What I'm still learning</h3>
+<ul>
+<li>PHP and MySQL, which my team used for the backend</li>
+<li>Bootstrap and jQuery</li>
+<li>Accessibility, such as color contrast and screen readers</li>
+<li>Git and publishing sites online</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="project">
+<img src="project-screenshot.jpg" width="960" height="540" alt="Title screen of the Human Rights E-Services project, showing the Commission on Human Rights seal beside the project name">
+<div>
+<h3>Human Rights E-Services</h3>
+<p class="sub">A legal consultation system for the Commission on Human Rights, Philippines. Team class project.</p>
+<p>Citizens can book legal consultations, send queries, and share documents online. CHR staff manage appointments and cases from one dashboard, replacing manual, paper-based booking with a service that is open 24/7.</p>
+<dl>
+<dt>My contribution</dt><dd>Front-end styling for the About page: the header and logo layout, the navigation bar with dropdown menus, and the responsive layout for tablets and phones.</dd>
+<dt>Built with</dt><dd>HTML5, CSS3, JavaScript, Bootstrap, PHP, MySQL</dd>
+<dt>Live link</dt><dd>Not available yet</dd>
+</dl>
+</div>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<h2>Contact</h2>
+<p>I'm open to learning opportunities, collaboration, and feedback on my work. The best way to reach me is by email.</p>
+<div class="btns"><a class="btn primary" href="mailto:waterix7@gmail.com">Email waterix7@gmail.com</a><button class="btn" id="copy" type="button">Copy email address</button></div>
+<p id="copied" role="status"></p>
+</section>
+</main>
+
+<footer>&copy; 2026 Alex Christian C. Tan</footer>
+<dialog id="lb" aria-label="Project screenshot"><img alt=""><button type="button" class="btn primary">Close</button></dialog>
+<script>
+(function(){
+var root=document.documentElement,tb=document.getElementById('theme');
+function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme:dark)').matches;}
+function label(){tb.textContent=isDark()?'Light mode':'Dark mode';}
+try{var sv=localStorage.getItem('theme');if(sv)root.setAttribute('data-theme',sv);}catch(e){}
+label();
+tb.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}label();});
+
+var links=[].slice.call(document.querySelectorAll('nav a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(function(s){io.observe(s);});
+
+var el=document.getElementById('role');
+var words=['styling navigation menus','building responsive pages','learning PHP and MySQL','practicing JavaScript'];
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+var w=0,c=0,del=false;
+(function tick(){
+var t=words[w],d=del?35:70;
+c+=del?-1:1;el.textContent=t.slice(0,c);
+if(!del&&c===t.length){del=true;d=1400;}
+else if(del&&c===0){del=false;w=(w+1)%words.length;d=300;}
+setTimeout(tick,d);
+})();
+}
+
+var pi=document.querySelector('.project img'),lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+pi.setAttribute('tabindex','0');pi.setAttribute('role','button');pi.setAttribute('aria-label','Enlarge the project screenshot');pi.title='Click to enlarge';
+function openLb(){lbi.src=pi.src;lbi.alt=pi.alt;lb.showModal();}
+pi.addEventListener('click',openLb);
+pi.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb();}});
+lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='BUTTON')lb.close();});
+
+document.getElementById('copy').addEventListener('click',function(){
+var s=document.getElementById('copied');
+if(navigator.clipboard){navigator.clipboard.writeText('waterix7@gmail.com').then(function(){s.textContent='Email address copied.';},function(){s.textContent='Copying did not work here. Use the Email button instead.';});}
+else{s.textContent='Copying is not available here. Use the Email button instead.';}
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+/* Alex Christian C. Tan - portfolio styles.
+   The colors are variables at the top (:root). Change them there to restyle the whole page. */
+
+:root {
+  --bg: #fbfcfd;
+  --text: #14222b;
+  --muted: #4b5d68;
+  --teal: #026a8d;
+  --on-teal: #fff;
+  --gold: #d1ac10;
+  --line: #d5e0e6;
+  --head: rgba(251,252,253,.94);
+  --ring: #fff;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+}
+
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171c;
+    --text: #eaf1f4;
+    --muted: #a9bac3;
+    --teal: #5cc4e8;
+    --on-teal: #08222c;
+    --gold: #e3c14a;
+    --line: #2a3943;
+    --head: rgba(15,23,28,.94);
+    --ring: #0f171c;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f171c;
+  --text: #eaf1f4;
+  --muted: #a9bac3;
+  --teal: #5cc4e8;
+  --on-teal: #08222c;
+  --gold: #e3c14a;
+  --line: #2a3943;
+  --head: rgba(15,23,28,.94);
+  --ring: #0f171c;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(env(safe-area-inset-top,0px) + 76px);
+}
+
+*,*::before,*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top,0px);
+  z-index: 30;
+  background: var(--head);
+  backdrop-filter: blur(8px);
+}
+
+header {
+  position: sticky;
+  top: env(safe-area-inset-top,0px);
+  z-index: 20;
+  background: var(--head);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+}
+
+.brand {
+  font-family: "Times New Roman",Times,serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-bottom: 2px solid transparent;
+}
+
+nav a:hover,nav a:focus-visible {
+  color: var(--teal);
+  border-color: var(--teal);
+  outline: none;
+}
+
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+h1,h2,h3 {
+  font-family: "Times New Roman",Times,serif;
+  line-height: 1.15;
+  margin: 0;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 28px;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  background: var(--gold);
+  margin-top: 10px;
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0 0 14px;
+  max-width: 66ch;
+}
+
+a {
+  color: var(--teal);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 44px;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 70px;
+}
+
+.photo {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(90deg,#049ee0 50%,#f3c72a 50%);
+  animation: spin 1.4s cubic-bezier(.2,.7,.2,1) 1;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 6px solid var(--ring);
+  animation: unspin 1.4s cubic-bezier(.2,.7,.2,1) 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(-180deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes unspin {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+h1 {
+  font-size: clamp(36px,6.4vw,58px);
+  margin-bottom: 16px;
+}
+
+.lead {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 11px 22px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--teal);
+  color: var(--teal);
+}
+
+.btn.primary {
+  background: var(--teal);
+  color: var(--on-teal);
+}
+
+.btn:hover,.btn:focus-visible {
+  opacity: .85;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 40px;
+}
+
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.skills div {
+  padding-left: 20px;
+  border-left: 4px solid var(--teal);
+}
+
+.skills div+div {
+  border-color: var(--gold);
+}
+
+ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+.project {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.project img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+}
+
+.sub {
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.contact p {
+  font-size: 19px;
+}
+
+footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (max-width:720px) {
+  .hero,.split,.skills,.project {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .photo {
+    width: 170px;
+    height: 170px;
+  }
+  section {
+    padding: 44px 20px;
+  }
+  .hero {
+    padding-top: 48px;
+  }
+}
+
+.theme,button.btn {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.theme {
+  font-size: 14px;
+  color: var(--teal);
+  background: none;
+  border: 2px solid var(--teal);
+  border-radius: 4px;
+  padding: 4px 12px;
+}
+
+button.btn {
+  background: none;
+}
+
+nav a.on {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+.now {
+  font-size: 18px;
+  color: var(--muted);
+  margin: 22px 0 0;
+  min-height: 3.4em;
+}
+
+#role {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.project img {
+  cursor: zoom-in;
+}
+
+dialog {
+  border: 0;
+  padding: 12px;
+  width: min(94vw,1000px);
+  background: var(--bg);
+  color: var(--text);
+}
+
+dialog::backdrop {
+  background: rgba(0,0,0,.72);
+}
+
+dialog img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 12px;
+}
+
+#copied {
+  margin: 12px 0 0;
+  min-height: 1.6em;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  #role::after {
+    content: "|";
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .photo,.photo img {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
